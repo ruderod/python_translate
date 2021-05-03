@@ -1,0 +1,38 @@
+#   Version 4.0 plus edit reals
+import csv
+import sys
+
+rowcount = 5
+if len(sys.argv) >= 2:
+    print ("this means sys.argv equal or bigger than 2")
+    rowcount = int(sys.argv[1])
+    print ("and so sys.argv total (which includes the python script as a argument.  Unsure if called by python script or if you just run 'script")
+    print (sys.argv)
+    print (sys.argv[1])
+    print ("and rowcount is")
+    print (rowcount)
+r = csv.reader(sys.stdin)
+
+print (r) 
+
+rows = [['column']]
+
+i = 0
+for z in r:
+    if i > rowcount:
+        break
+    
+    if not i:
+        for c in z:
+            rows.append([c])
+    else:
+        rows[0].append("row %d" % i)
+        j = 1
+        for c in z:
+            rows[j].append(c)
+            j = j+1
+
+    i = i+1
+
+if(i > 1): 
+    csv.writer(sys.stdout).writerows(rows)
